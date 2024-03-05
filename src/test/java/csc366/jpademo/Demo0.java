@@ -44,7 +44,7 @@ public class Demo0 {
     @Autowired
     private PersonRepository personRepository;
 
-    private final Person person = new Person("test", "test", "test@calpoly.edu");  // "reference" person
+    private final PersonR person = new PersonR("test", "test", "test@calpoly.edu");  // "reference" person
     
     @BeforeEach
     private void setup() {
@@ -54,7 +54,7 @@ public class Demo0 {
     @Test
     @Order(1)
     public void testSavePerson() {
-	Person person2 = personRepository.findByFirstName("test");
+	PersonR person2 = personRepository.findByFirstName("test");
 
 	log.info(person2.toString());
 	
@@ -66,7 +66,7 @@ public class Demo0 {
     @Test
     @Order(2)
     public void testGetPerson() {
-	Person person2 = personRepository.findByFirstName("test");
+	PersonR person2 = personRepository.findByFirstName("test");
 	assertNotNull(person);
 	assertEquals(person2.getFirstName(), person.getFirstName());
 	assertEquals(person2.getLastName(), person.getLastName());
@@ -88,7 +88,7 @@ public class Demo0 {
     @Test
     @Order(5)
     public void testDeletByPersonId() {
-	Person e = personRepository.findByFirstName("test");
+	PersonR e = personRepository.findByFirstName("test");
 	personRepository.deleteById(e.getId());
 	personRepository.flush();
     }
@@ -96,14 +96,14 @@ public class Demo0 {
     @Test
     @Order(6)
     public void testJpqlFinder() {
-	Person e = personRepository.findByNameJpql("test");
+	PersonR e = personRepository.findByNameJpql("test");
 	assertEquals(e.getFirstName(), person.getFirstName());
     }
 
     @Test
     @Order(7)
     public void testSqlFinder() {
-	Person p = personRepository.findByNameSql("test");
+	PersonR p = personRepository.findByNameSql("test");
 	assertEquals(p.getFirstName(), person.getFirstName());
     }
 

@@ -51,7 +51,7 @@ public class Demo1 {
     @Autowired
     private PersonRepository personRepository;
 
-    private final Person person = new Person("test", "test", "test@calpoly.edu");  // "reference" person
+    private final PersonR person = new PersonR("test", "test", "test@calpoly.edu");  // "reference" person
     private final Address addrCP = new Address("1 Grand Ave", "SLO", "CA", "93407"); 
     
     @BeforeEach
@@ -64,7 +64,7 @@ public class Demo1 {
     @Test
     @Order(1)
     public void testPersonAndAddress() {
-	Person person2 = personRepository.findByFirstName("test");
+	PersonR person2 = personRepository.findByFirstName("test");
 
 	log.info(person2.toString());
 	
@@ -75,7 +75,7 @@ public class Demo1 {
     @Test
     @Order(2)
     public void testPersonAddressQuery() {
-	Person person2 = personRepository.findByFirstName("test");
+	PersonR person2 = personRepository.findByFirstName("test");
 	assertNotNull(person);
 	assertEquals(person2.getFirstName(), person.getFirstName());
 	assertEquals(person2.getLastName(), person.getLastName());
@@ -85,7 +85,7 @@ public class Demo1 {
     @Test
     @Order(3)
     public void testRemoveAddress() {
-	Person p = personRepository.findByFirstName("test");
+	PersonR p = personRepository.findByFirstName("test");
         Address a = new ArrayList<Address>(p.getAddresses()).get(0);  // get an address
 	p.removeAddress(a);
 	personRepository.save(p);
@@ -95,7 +95,7 @@ public class Demo1 {
     @Test
     @Order(4)
     public void testRemoveAddressAndFlush() {
-	Person p = personRepository.findByFirstName("test");
+	PersonR p = personRepository.findByFirstName("test");
         Address a = new ArrayList<Address>(p.getAddresses()).get(0);  // get an address
 	p.removeAddress(a);
 	personRepository.saveAndFlush(p);
@@ -105,7 +105,7 @@ public class Demo1 {
     @Test
     @Order(5)
     public void testJpqlJoin() {
-	Person p = personRepository.findByNameWithAddressJpql("test");
+	PersonR p = personRepository.findByNameWithAddressJpql("test");
 	log.info(p.toString());
 
 	p.addAddress(new Address("2 Grand Ave", "SLO", "CA", "93407-0002"));

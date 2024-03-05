@@ -10,99 +10,186 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.persistence.OrderColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.UniqueConstraint;
-
 import javax.validation.constraints.NotNull;
 
-@Entity  // indicates that this class maps to a database table
-@Table(
-    name = "person",     // may be omitted for default table naming
-    uniqueConstraints = @UniqueConstraint(columnNames={"last_name", "first_name"}) // requires @Column(name=...) 
-)
+@Entity
+@Table (name="Person")
+
 public class Person {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @Column(name="first_name")
-    private String firstName;
-    
-    @NotNull
-    @Column(unique=true, name="last_name")
-    private String lastName;
+    @Column(name="username")
+    private String username;
 
-    @Column(unique=true)
+    @Column(name="email")
     private String email;
 
-    @OneToMany(mappedBy = "person",       // join column should be in *Address*
-               cascade = CascadeType.ALL, // all JPA actions (persist, remove, refresh, merge, detach) propagate to each address
-               orphanRemoval = true,      // address records that are no longer attached to a person are removed
-               fetch = FetchType.LAZY)
-    //@OrderColumn(name = "list_idx")
-    private List<Address> addresses = new ArrayList<>();
+    @Column(name="address")
+    private String address;
+
+    @Column(name="phoneNo")
+    private String phoneNo;
+
+    @Column(name="FirstName")
+    private String FirstName;
+
+    @Column(name="LastName")
+    private String LastName;
+
+    // @OneToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name="contract_id", nullable = true)
     
-    public Person() { }
-    
-    public Person(String firstName, String lastName, String email) {
-	this.firstName = firstName;
-	this.lastName = lastName;
-	this.email = email;
-    }
-    
-    public Long getId() {
-	return id;
-    }
-    public void setId(Long id) {
-	this.id = id;
-    }
-    
-    public String getFirstName() {
-	return firstName;
-    }
-    public void setFirstName(String firstName) {
-	this.firstName = firstName;
+    @Column(name="RewardsOption", nullable = true)
+    private Boolean RewardsOption;
+
+    @Column(name="PaymentType", nullable = true)
+    private String PaymentType;
+
+    @Column(name="SSN", nullable = true)
+    private int SSN;
+
+    @Column(name="StoreId", nullable = true)
+    private int StoreId;
+
+    @Column(name="CompanyOwnings", nullable = true)
+    private double CompanyOwnings;
+
+    @Column(name="CompanyName", nullable = true)
+    private String companyName;
+
+    @Column(name="name", nullable = true)
+    private String name;
+
+    @Column(name="CountryofIncorperation", nullable = true)
+    private String CountryofIncorperation;
+
+    public long getId() {
+        return id;
     }
 
-    public String getLastName() {
-	return lastName;
+    public void setId(long id) {
+        this.id = id;
     }
-    public void setLastName(String lastName) {
-	this.lastName = lastName;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
-	return email;
+        return email;
     }
+
     public void setEmail(String email) {
-	this.email = email;
+        this.email = email;
     }
 
-    public void addAddress(Address a) {
-	addresses.add(a);
-	a.setPerson(this);
-    }
-    public void removeAddress(Address a) {
-	addresses.remove(a);
-	a.setPerson(null);
-    }
-    public List<Address> getAddresses() {
-	return this.addresses;
-    }
-    
-    @Override
-    public String toString() {
-	StringJoiner sj = new StringJoiner("," , Person.class.getSimpleName() + "[" , "]");
-	sj.add(id.toString()).add(firstName).add(lastName).add("addresses="+addresses.toString());
-	return sj.toString();
+    public String getAddress() {
+        return address;
     }
 
-    @Override
-    public int hashCode() {
-	return 366;
+    public void setAddress(String address) {
+        this.address = address;
     }
-    
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getFirstName() {
+        return FirstName;
+    }
+
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
+    public Boolean getRewardsOption() {
+        return RewardsOption;
+    }
+
+    public void setRewardsOption(Boolean rewardsOption) {
+        RewardsOption = rewardsOption;
+    }
+
+    public String getPaymentType() {
+        return PaymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        PaymentType = paymentType;
+    }
+
+    public int getSSN() {
+        return SSN;
+    }
+
+    public void setSSN(int sSN) {
+        SSN = sSN;
+    }
+
+    public int getStoreId() {
+        return StoreId;
+    }
+
+    public void setStoreId(int storeId) {
+        StoreId = storeId;
+    }
+
+    public double getCompanyOwnings() {
+        return CompanyOwnings;
+    }
+
+    public void setCompanyOwnings(double companyOwnings) {
+        CompanyOwnings = companyOwnings;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCountryofIncorperation() {
+        return CountryofIncorperation;
+    }
+
+    public void setCountryofIncorperation(String countryofIncorperation) {
+        CountryofIncorperation = countryofIncorperation;
+    }
+
+
+
+
 }

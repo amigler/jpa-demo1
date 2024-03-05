@@ -30,7 +30,7 @@ public class Address {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id", nullable = true)
-    private Person person;
+    private PersonR person;
     
     public Address() { }
     
@@ -76,10 +76,10 @@ public class Address {
 	this.zipCode = zipCode;
     }
 
-    public Person getPerson() {
+    public PersonR getPerson() {
 	return person;
     }
-    public void setPerson(Person person) {
+    public void setPerson(PersonR person) {
 	this.person = person;
     }
         
